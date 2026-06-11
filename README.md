@@ -196,10 +196,7 @@ Reports must render reliably in EJS templates and PDF exports. A strict JSON sch
 | Codex agents | Co-engineered the app using agentic pair programming patterns                                    |
 
 ### Architecture
-
-![Architecture diagram](./docs/diagrams/PlaceHack-AI-Agent-Architecture.png)
-
-![PlaceHack AI Workflow](./docs/diagrams/PlaceHack-AI-Workflow.png)
+ AI Workflow](./docs/diagrams/PlaceHack-AI-Workflow.png)
 
 See [AGENTS.md](./AGENTS.md) for the runtime agent persona, workflow diagrams, and configuration reference.  
 See [skills.md](./skills.md) for geocoding, schema synthesis, and design-time agent capabilities.
