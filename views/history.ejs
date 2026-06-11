@@ -1,0 +1,33 @@
+<%- include('partials/layout-start') %>
+<section class="pixel-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-slate-50 dark:bg-slate-950 min-h-[90vh]">
+    <div class="mb-12 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-b border-slate-200 dark:border-slate-800 pb-8">
+        <div><h1 class="pixel-heading text-2xl font-bold uppercase tracking-tight text-primary-600">Dossier History</h1><p class="text-sm text-slate-500 dark:text-slate-400 mt-2 font-light">Revisit and manage your previously compiled geographical analysis reports.</p></div>
+        <a href="/" class="pixel-button inline-flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white text-xs font-mono uppercase tracking-wider rounded transition-all duration-200 cursor-pointer">New Scan</a>
+    </div>
+
+    <% if (!reports.length) { %>
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded p-12 text-center max-w-md mx-auto mt-12">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-800 dark:text-white">Empty History Log</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-2 mb-6 font-light">No entries found. Compile your first analytical scan from the control panel.</p>
+            <a href="/" class="pixel-button secondary inline-flex items-center justify-center px-4 py-2 border border-slate-350 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-mono uppercase tracking-wider rounded hover:bg-slate-50 dark:hover:bg-slate-800 transition-all cursor-pointer">Run Engine</a>
+        </div>
+    <% } else { %>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <% reports.forEach((report) => { const title = report.reportData.title || 'Location Report'; const catchphrase = report.reportData.subtitle || String(report.reportData.soul || 'Dossier Entry').slice(0, 140); %>
+                <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded p-6 flex flex-col justify-between hover:border-primary-400 dark:hover:border-primary-800 transition-all duration-200 group" id="report-card-<%= report.id %>">
+                    <div>
+                        <div class="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-slate-450 dark:text-slate-500 mb-4 pb-3 border-b border-slate-100 dark:border-slate-800/60"><span class="inline-flex items-center gap-1"><%= report.locationDisplay %></span><span><%= new Date(report.createdAt).toLocaleDateString('en-US') %></span></div>
+                        <h3 class="text-base font-bold text-slate-800 dark:text-white uppercase tracking-tight line-clamp-1 mb-2"><%= title %></h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-6 font-light leading-relaxed"><%= catchphrase %></p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-850">
+                        <a href="/?load_report_id=<%= report.id %>" class="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-primary-600 hover:text-primary-700 font-bold transition-colors cursor-pointer">Open Log</a>
+                        <button type="button" data-delete-report-id="<%= report.id %>" class="delete-report-btn w-7 h-7 rounded border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-400 hover:text-rose-550 dark:hover:text-rose-400 hover:bg-rose-500/5 dark:hover:bg-rose-500/10 transition-all cursor-pointer" title="Delete Dossier">Del</button>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+        <% if (totalPages > 1) { %><div class="mt-10 flex justify-center gap-3 text-xs font-mono uppercase"><% for (let i = 1; i <= totalPages; i++) { %><a class="px-3 py-2 rounded border <%= i === page ? 'bg-primary-600 text-white border-primary-600' : 'border-slate-300 dark:border-slate-700' %>" href="/history?page=<%= i %>"><%= i %></a><% } %></div><% } %>
+    <% } %>
+</section>
+<%- include('partials/layout-end') %>
