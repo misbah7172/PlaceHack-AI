@@ -1,105 +1,121 @@
-# PlaceHack AI
+<div align="center">
 
-**One-click instant deep-dive location reports created by Misbah.**
+# 🌍 PlaceHack AI
 
-PlaceHack AI turns any place into a structured cultural intelligence dossier. Scan your coordinates or search manually — the Location Intelligence Agent synthesizes history, must-visit spots, local flavors, practical tips, and fun facts into a polished, scrollable report you can save and export as PDF.
+### One-click cultural intelligence for any place on Earth.
 
-Built with a Node.js backend, Tailwind CSS frontend, agentic development notes ([AGENTS.md](AGENTS.md), [skills.md](skills.md)), and meaningful OpenAI platform integration.
+Scan your coordinates or search any location — PlaceHack AI's Location Intelligence Agent synthesizes hidden history, must-visit spots, local flavors, practical travel tips, and surprising facts into a polished, exportable dossier.
+
+[Live Demo](https://placehack-ai.onrender.com) · [Report an Issue](https://github.com/misbah7172/PlaceHack-AI/issues) · [Source Code](https://github.com/misbah7172/PlaceHack-AI)
+
+> ⚠️ Hosted on Render's free tier — first load may take 30–60 seconds due to cold starts.
+
+</div>
+
+---
 
 ## Table of Contents
 
-- [PlaceHack AI](#PlaceHack-ai)
-  - [Table of Contents](#table-of-contents)
-  - [Features](#features)
-  - [Tech Stack](#tech-stack)
-  - [Requirements](#requirements)
-  - [Running Locally](#running-locally)
-    - [1. Clone the repository](#1-clone-the-repository)
-    - [2. Install dependencies](#2-install-dependencies)
-    - [3. Configure environment](#3-configure-environment)
-    - [4. Start the application](#4-start-the-application)
-    - [5. Open in browser](#5-open-in-browser)
-  - [How to Use](#how-to-use)
-  - [Screenshots](#screenshots)
-  - [Problem \& Impact](#problem--impact)
-    - [What problem does the project solve?](#what-problem-does-the-project-solve)
-    - [Who benefits?](#who-benefits)
-    - [What is the potential impact?](#what-is-the-potential-impact)
-  - [OpenAI Integration](#openai-integration)
-    - [Model \& API](#model--api)
-    - [Why structured outputs?](#why-structured-outputs)
-    - [Why reasoning effort tuning?](#why-reasoning-effort-tuning)
-    - [How was OpenAI integrated into the solution?](#how-was-openai-integrated-into-the-solution)
-    - [Agentic development](#agentic-development)
-    - [Architecture](#architecture)
-    - [Agentic development](#agentic-development-1)
-  - [Project Structure](#project-structure)
-  - [Author](#author)
+- [Overview](#overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Environment Configuration](#environment-configuration)
+  - [Running the App](#running-the-app)
+- [How to Use](#how-to-use)
+- [OpenAI Integration](#openai-integration)
+- [Agentic Development](#agentic-development)
+- [Project Structure](#project-structure)
+- [Author](#author)
+
+---
+
+## Overview
+
+Getting a genuine, structured picture of any place is surprisingly difficult. Mainstream travel guides recycle the same major cities. Wikipedia lacks depth on districts. Blog posts are optimized for search engines, not for insight. Assembling real cultural depth — local history, hidden spots, authentic food, practical logistics — demands hours of research across fragmented sources.
+
+**PlaceHack AI solves this in a single click.**
+
+It detects the user's location via the browser's Geolocation API (reverse-geocoded to district + country) or accepts a manual text query for anywhere in the world. A dedicated AI agent then produces a magazine-quality cultural dossier — validated, schema-bound, and ready to read or export as PDF. Not a chatbot. Not a summary. A structured intelligence report.
+
+---
 
 ## Features
 
-| Feature                     | Description                                                                                                 |
-| --------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| **Scan Geolocation**        | Browser GPS → reverse geocode (English, district + country) → instant report                                |
-| **Manual search**           | Enter any city, district, landmark, or region                                                               |
-| **AI location dossier**     | 8 structured sections: title, subtitle, soul narrative, history, must-visit, local flavors, tips, fun facts |
-| **Situation-based world UI** | Automatically switches retro pixel-world theme based on the location's current environment and development context |
-| **Accidents & disasters**   | Adds respectful historical accident, disaster, and crisis context for the selected location or nearby region |
-| **Structured JSON outputs** | Strict OpenAI `json_schema` — every field validated before render                                           |
-| **Report caching**          | JSON-backed local data store avoids repeat API calls for the same query                                     |
-| **Regenerate**              | Force a fresh AI analysis on demand                                                                         |
-| **PDF export**              | Download a formatted intelligence dossier                                                                   |
-| **User accounts**           | Register/login to persist report history                                                                    |
-| **Dark mode**               | System-aware toggle with local persistence                                                                  |
-| **Responsive UI**           | Tailwind CSS 4, mobile-first layout                                                                         |
+| Feature | Description |
+|---|---|
+| **Geolocation Scan** | Browser GPS → reverse-geocoded to English district + country → instant report |
+| **Manual Search** | Enter any city, district, landmark, or region worldwide |
+| **AI Location Dossier** | 10 structured sections: title, subtitle, soul narrative, theme context, history, must-visit, local flavors, practical tips, accidents & disasters, fun facts |
+| **Adaptive World UI** | Retro pixel-art theme switches automatically based on the location's development context and environment |
+| **Historical Incidents** | Respectful coverage of historical accidents, disasters, and crises relevant to the area |
+| **Strict JSON Outputs** | OpenAI `json_schema` enforcement — every field typed, required, and validated before render |
+| **Report Caching** | JSON-backed local store prevents redundant API calls for repeated queries |
+| **Force Regenerate** | Bypass cache and trigger a fresh AI analysis on demand |
+| **PDF Export** | Download a formatted intelligence dossier via PDFKit |
+| **User Accounts** | Register and log in to persist your full report history |
+| **Dark Mode** | System-aware toggle with local storage persistence |
+| **Responsive UI** | Tailwind CSS 4, mobile-first layout |
+
+---
 
 ## Tech Stack
 
-- **Backend:** Node.js, Express, EJS
-- **Frontend:** Tailwind CSS 4, Vite
-- **AI:** OpenAI Chat Completions (`gpt-5-mini`) via the official `openai` Node SDK
-- **Geocoding:** OpenStreetMap Nominatim (no API key required)
-- **Data store:** Local JSON file at `data/placehack.json`
-- **PDF:** PDFKit
+| Layer | Technology |
+|---|---|
+| **Backend** | Node.js, Express.js |
+| **Templating** | EJS |
+| **Frontend** | Tailwind CSS 4, Vite |
+| **AI** | OpenAI `gpt-5-mini` via the official `openai` Node SDK |
+| **Geocoding** | OpenStreetMap Nominatim (no API key required) |
+| **Data Store** | Local JSON file — `data/placehack.json` |
+| **PDF Generation** | PDFKit |
 
-## Requirements
+---
 
-- [Node.js](https://nodejs.org/) 18+ and npm
+## Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) v18 or higher
+- [npm](https://www.npmjs.com/)
 - An [OpenAI API key](https://platform.openai.com/api-keys)
 
-## Running Locally
-
-### 1. Clone the repository
+### Installation
 
 ```bash
+# Clone the repository
 git clone https://github.com/misbah7172/PlaceHack-AI.git
 cd PlaceHack-AI
-```
 
-### 2. Install dependencies
-
-```bash
+# Install dependencies
 npm install
 ```
 
-### 3. Configure environment
+### Environment Configuration
 
-Open `.env` and set your OpenAI credentials:
+Open `.env` and fill in your credentials:
 
 ```env
 APP_NAME="PlaceHack AI"
 NODE_ENV=development
 PORT=3000
-SESSION_SECRET=change-this-secret
+SESSION_SECRET=change-this-to-a-random-string
+
 OPENAI_API_KEY=sk-your-key-here
 OPENAI_MODEL=gpt-5-mini
 OPENAI_MAX_COMPLETION_TOKENS=9000
 OPENAI_REASONING_EFFORT=low
 ```
 
-### 4. Start the application
+> **Why `max_completion_tokens=9000` and `reasoning_effort=low`?**  
+> `gpt-5-mini` is a reasoning model — it consumes tokens on internal chain-of-thought before writing output. The default 4000-token budget can be exhausted before the full dossier is generated. Raising the token ceiling and lowering reasoning effort ensures the complete report is always returned.
 
-**Development (server + Vite hot reload):**
+### Running the App
+
+**Development** (with Vite hot reload):
 
 ```bash
 npm run dev
@@ -112,108 +128,100 @@ npm run build
 npm start
 ```
 
-### 5. Open in browser
+Then open **[http://127.0.0.1:3000](http://127.0.0.1:3000)** in your browser.
 
-Visit **[http://127.0.0.1:3000](http://127.0.0.1:3000)**
+---
 
 ## How to Use
 
-1. Click **Scan Geolocation** (allow location permission), or type a place and submit.
-2. Wait ~30–60 seconds while the Location Intelligence Agent generates the dossier.
-3. Click **Regenerate** to force a fresh AI analysis on demand.
-4. Click **Download PDF** to download a formatted intelligence dossier.
-5. Optionally, register an account to save history.
+1. **Scan or Search** — Click **Scan Geolocation** and allow location access, or type any place into the search bar.
+2. **Wait for the Dossier** — The Location Intelligence Agent takes ~30–60 seconds to synthesize the full report.
+3. **Explore the Report** — Scroll through history, must-visit spots, local flavors, practical tips, and more.
+4. **Regenerate** — Click **Regenerate** to force a fresh analysis and bypass the cache.
+5. **Export** — Click **Download PDF** to save a formatted version of the dossier.
+6. **Save History** — Create an account to persist reports across sessions.
 
-## Problem & Impact
-
-### What problem does the project solve?
-
-Travel and local discovery content is scattered, generic, or shallow. Getting a rich, structured picture of a place — its history, culture, food, and practical advice — usually requires hours of research across multiple sources.
-
-### Who benefits?
-
-- **Travelers** exploring unfamiliar cities or districts
-- **Students and Researchers** needing quick cultural context
-- **Remote Workers** relocating or visiting new areas
-- **Local Communities** rediscovering their own region through AI-curated narratives
-
-### What is the potential impact?
-
-PlaceHack AI democratizes location intelligence: one click or one search produces a magazine-quality dossier that would be impractical to assemble manually. It is especially valuable for lesser-known districts where mainstream travel guides offer little depth.
-
-**Category fit:** Creative Applications, Education & Learning, Local Problem Solving, AI Agents.
+---
 
 ## OpenAI Integration
 
-PlaceHack AI uses OpenAI as the **core intelligence layer** — not as a bolt-on chat widget.
+PlaceHack AI uses OpenAI as its **core intelligence layer** — not as a chat widget or autocomplete aid. The entire product depends on a single, well-engineered structured API call.
 
-### Model & API
+### Model Configuration
 
-| Setting               | Value                                     |
-| --------------------- | ----------------------------------------- |
-| Model                 | `gpt-5-mini`                              |
-| Endpoint              | Chat Completions                          |
-| Response format       | Strict `json_schema` (structured outputs) |
-| Max completion tokens | `9000`                                    |
-| Reasoning effort      | `low`                                     |
-| SDK                   | `openai` Node SDK                         |
+| Parameter | Value | Reason |
+|---|---|---|
+| **Model** | `gpt-5-mini` | Strong long-form synthesis at efficient cost |
+| **Endpoint** | `/v1/chat/completions` | Standard Chat Completions |
+| **Response format** | `strict json_schema` | Guarantees every field is present and typed |
+| **Max completion tokens** | `9000` | Headroom for full dossier after internal reasoning |
+| **Reasoning effort** | `low` | Reserves token budget for output, not chain-of-thought |
+| **SDK** | `openai` (Node.js) | Official OpenAI Node SDK |
 
-### Why structured outputs?
+### Structured Output Schema
 
-Reports must render reliably in EJS templates and PDF exports. A strict JSON schema guarantees every section (`title`, `subtitle`, `soul`, `theme_context`, `history`, `must_visit`, `local_flavors`, `practical_tips`, `historical_accidents_disasters`, `fun_facts`) is present and typed correctly — no fragile markdown parsing.
+Every report conforms to a strict schema with 10 required top-level sections. The schema is enforced at the OpenAI API level — if a field is missing or incorrectly typed, the API rejects it before the response reaches the application.
 
-### Why reasoning effort tuning?
+```
+title · subtitle · soul · theme_context · history[]
+must_visit[] · local_flavors[] · practical_tips[]
+historical_accidents_disasters[] · fun_facts[]
+```
 
-`gpt-5-mini` is a reasoning model. Internal reasoning tokens count against the completion budget. With the default 4000-token limit, the model could exhaust its budget on reasoning and return empty content. Setting `reasoning_effort=low` and `max_completion_tokens=9000` ensures the full dossier is generated.
+This means the EJS renderer, PDF exporter, and cache layer all operate on a guaranteed, predictable data shape — no defensive parsing, no fallback handling.
 
-### How was OpenAI integrated into the solution?
+### Agent Persona
 
-1. **Input:** User provides a location via browser geolocation (reverse-geocoded to English district + country) or manual text search.
-2. **Agent invocation:** `src/services/openaiReportService.js` sends a system prompt defining the **PlaceHack Intelligence Agent** persona (travel writer, cultural anthropologist, historian) plus the user's location.
-3. **Structured output:** OpenAI returns a strict JSON object with required dossier sections plus `theme_context` and `historical_accidents_disasters`.
-4. **Theme selection:** The frontend uses `theme_context.world_theme` to switch the retro pixel-world design automatically for the location's current situation.
-5. **Validation & cache:** JSON is parsed and validated; results are stored in the local JSON data store to avoid duplicate API calls.
-6. **Delivery:** Express renders the dossier in a responsive EJS UI and supports PDF export via PDFKit.
+The system prompt configures the **PlaceHack Intelligence Agent** as a world-class travel writer, cultural anthropologist, and historian. The persona instruction produces vivid, non-generic writing that surfaces lesser-known local stories rather than recycling Wikipedia entries.
 
-### Agentic development
+### Adaptive Theme Selection
 
-| Artifact     | Role                                                                                             |
-| ------------ | ------------------------------------------------------------------------------------------------ |
-| `AGENTS.md`  | Documents runtime Location Intelligence Agent architecture, Mermaid workflows, and configuration |
-| `skills.md`  | Defines geocoding, structured dossier synthesis, PDF layout, and UI skills                       |
-| Codex agents | Co-engineered the app using agentic pair programming patterns                                    |
+The schema includes a `theme_context.world_theme` field. The frontend reads this value and automatically switches the retro pixel-art UI theme to match the detected environment — jungle, developed city, underdeveloped town, village, mining town, coastal port, and more.
 
-### Architecture
- AI Workflow](./docs/diagrams/PlaceHack-AI-Workflow.png)
+---
 
-See [AGENTS.md](./AGENTS.md) for the runtime agent persona, workflow diagrams, and configuration reference.  
-See [skills.md](./skills.md) for geocoding, schema synthesis, and design-time agent capabilities.
+## Agentic Development
 
-### Agentic development
+PlaceHack AI was co-engineered using **Codex** as an agentic pair programmer. The development process followed a three-phase agentic workflow:
 
-| Artifact     | Role                                                                                             |
-| ------------ | ------------------------------------------------------------------------------------------------ |
-| `AGENTS.md`  | Documents runtime Location Intelligence Agent architecture, Mermaid workflows, and configuration |
-| `skills.md`  | Defines geocoding, structured dossier synthesis, PDF layout, and UI skills                       |
-| Codex agents | Co-engineered the app using agentic pair programming patterns                                    |
+1. **Interactive Planning** — Requirements, design tokens, color palette verification, and constraint identification upfront.
+2. **Context-Aware Implementation** — Full codebase analysis before each change; targeted, minimal edits rather than broad rewrites.
+3. **Automated Verification** — Node.js runtime checks and Vite production builds after every cycle.
+
+The agent architecture is treated as a first-class engineering artifact, fully documented in two companion files:
+
+| Document | Contents |
+|---|---|
+| [`AGENTS.md`](AGENTS.md) | Runtime agent persona, system architecture diagrams, Mermaid sequence workflows, and configuration reference |
+| [`skills.md`](skills.md) | Geocoding skill, annotated JSON schema spec, PDF export contract, UI design conventions, and Vite build pipeline |
+
+---
 
 ## Project Structure
 
 ```
-src/
-├── server.js                     # Express routes, auth, geocoding, PDF
-├── store.js                      # JSON-backed local data store
-└── services/
-  └── openaiReportService.js    # OpenAI agent + JSON schema
-resources/
-├── js/app.js                     # Geolocation, report UI, API calls
-├── css/app.css                   # Tailwind CSS entry
-views/                            # EJS templates
-public/favicon.svg                # Location favicon
-AGENTS.md                         # Agent architecture (Codex challenge)
-skills.md                         # Agent capabilities (Codex challenge)
+PlaceHack-AI/
+├── src/
+│   ├── server.js                    # Express routes, auth, geocoding, PDF export
+│   ├── store.js                     # JSON-backed local data store
+│   └── services/
+│       └── openaiReportService.js   # Location Intelligence Agent + JSON schema
+├── resources/
+│   ├── js/app.js                    # Geolocation handling, report UI, API calls
+│   └── css/app.css                  # Tailwind CSS entry point
+├── views/                           # EJS templates
+├── data/
+│   └── placehack.json               # Cached reports store
+├── public/
+│   └── favicon.svg
+├── AGENTS.md                        # Agent architecture reference
+├── skills.md                        # Agent capabilities reference
+├── .env                             # Environment variables (not committed)
+└── package.json
 ```
+
+---
 
 ## Author
 
-Developed by  ([@misbah7172](https://github.com/misbah7172))
+**Misbah** — [@misbah7172](https://github.com/misbah7172)
