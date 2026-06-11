@@ -124,18 +124,6 @@ Visit **[http://127.0.0.1:3000](http://127.0.0.1:3000)**
 4. Click **Download PDF** to download a formatted intelligence dossier.
 5. Optionally, register an account to save history.
 
-## Screenshots
-
-![Screenshot of Landing Page](./docs/screenshots/Screenshot-Landing-Page.png)
-
-![Screenshot of Sign Up Page](./docs/screenshots/Screenshot-Signup-Page.png)
-
-![Screenshot of Sign In Page](./docs/screenshots/Screenshot-Signin-Page.png)
-
-![Screenshot of Report Page](./docs/screenshots/Screenshot-Report-Page.png)
-
-![Screenshot of Report PDF](./docs/screenshots/Screenshot-History-Page.png)
-
 ## Problem & Impact
 
 ### What problem does the project solve?
