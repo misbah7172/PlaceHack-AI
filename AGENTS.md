@@ -122,7 +122,7 @@ All runtime agent parameters are externalized to environment variables, allowing
 |---|---|---|---|
 | **Model** | `OPENAI_MODEL` | `gpt-5-mini` | The OpenAI model executing the agent's analysis and synthesis. |
 | **Schema Enforcement** | `response_format` | `json_schema` | Activates OpenAI's structured outputs mode, enforcing schema compliance at the API level. |
-| **Token Budget** | `OPENAI_MAX_COMPLETION_TOKENS` | `8000` | Maximum completion tokens allocated per request. Reasoning models require generous headroom to avoid truncated JSON. |
+| **Token Budget** | `OPENAI_MAX_COMPLETION_TOKENS` | `9000` | Maximum completion tokens allocated per request. Reasoning models require generous headroom to avoid truncated JSON. |
 | **Reasoning Effort** | `OPENAI_REASONING_EFFORT` | `low` | Controls internal chain-of-thought token usage. Set to `low` to preserve token budget for the output payload rather than internal reasoning traces. |
 
 **Configuration Notes**

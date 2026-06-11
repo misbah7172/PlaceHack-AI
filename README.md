@@ -93,7 +93,7 @@ PORT=3000
 SESSION_SECRET=change-this-secret
 OPENAI_API_KEY=sk-your-key-here
 OPENAI_MODEL=gpt-5-mini
-OPENAI_MAX_COMPLETION_TOKENS=8000
+OPENAI_MAX_COMPLETION_TOKENS=9000
 OPENAI_REASONING_EFFORT=low
 ```
 
@@ -166,7 +166,7 @@ PlaceHack AI uses OpenAI as the **core intelligence layer** — not as a bolt-on
 | Model                 | `gpt-5-mini`                              |
 | Endpoint              | Chat Completions                          |
 | Response format       | Strict `json_schema` (structured outputs) |
-| Max completion tokens | `8000`                                    |
+| Max completion tokens | `9000`                                    |
 | Reasoning effort      | `low`                                     |
 | SDK                   | `openai` Node SDK                         |
 
@@ -176,7 +176,7 @@ Reports must render reliably in EJS templates and PDF exports. A strict JSON sch
 
 ### Why reasoning effort tuning?
 
-`gpt-5-mini` is a reasoning model. Internal reasoning tokens count against the completion budget. With the default 4000-token limit, the model could exhaust its budget on reasoning and return empty content. Setting `reasoning_effort=low` and `max_completion_tokens=8000` ensures the full dossier is generated.
+`gpt-5-mini` is a reasoning model. Internal reasoning tokens count against the completion budget. With the default 4000-token limit, the model could exhaust its budget on reasoning and return empty content. Setting `reasoning_effort=low` and `max_completion_tokens=9000` ensures the full dossier is generated.
 
 ### How was OpenAI integrated into the solution?
 
@@ -231,4 +231,4 @@ skills.md                         # Agent capabilities (Codex challenge)
 
 ## Author
 
-Developed by Atia Farha ([@misbah7172](https://github.com/misbah7172))
+Developed by  ([@misbah7172](https://github.com/misbah7172))

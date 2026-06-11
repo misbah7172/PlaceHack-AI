@@ -159,7 +159,7 @@ export async function generateLocationReport(location) {
             { role: 'user', content: `Generate a comprehensive location report for: ${location}` },
         ],
         response_format: responseFormat,
-        max_completion_tokens: Number(process.env.OPENAI_MAX_COMPLETION_TOKENS || 8000),
+        max_completion_tokens: Number(process.env.OPENAI_MAX_COMPLETION_TOKENS || 9000),
     };
 
     if (process.env.OPENAI_REASONING_EFFORT) {
