@@ -10,6 +10,7 @@
         "check": "node --check src/server.js && node --check src/store.js && node --check src/services/openaiReportService.js"
     },
     "dependencies": {
+        "@tailwindcss/vite": "^4.0.0",
         "bcryptjs": "^3.0.2",
         "dotenv": "^17.2.3",
         "ejs": "^3.1.10",
@@ -17,11 +18,10 @@
         "express-session": "^1.18.2",
         "openai": "^6.10.0",
         "pdfkit": "^0.17.2",
-        "session-file-store": "^1.5.0"
-    },
-    "devDependencies": {
-        "@tailwindcss/vite": "^4.0.0",
+        "session-file-store": "^1.5.0",
         "tailwindcss": "^4.0.0",
         "vite": "^8.0.0"
+    },
+    "devDependencies": {
     }
 }
